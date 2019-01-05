@@ -16,6 +16,11 @@ h1 {
     color: #888;
     font-family: Cambria, Georgia;
   }
+
+  nav, a {
+    padding-right: 1em;
+  }
+
   /* everywhere else */
   * {
     font-family: Arial, Helvetica, sans-serif;
