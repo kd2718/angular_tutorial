@@ -10,12 +10,16 @@ import {Observable, of} from 'rxjs';
 import {catchError, map, tap} from 'rxjs/operators';
 
 
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class HeroService {
 
-  private heroesUrl = 'api/heroes'; // Url to web API
+  private heroesUrl = 'api/heroes'; // Url to web API 
 
   getHeroes(): Observable<Hero[]> {
     // TODO: send message after getting heroes
@@ -38,6 +42,21 @@ export class HeroService {
     );
   }
 
+  /** PUT: update the hero on the server */
+  updateHero (hero: Hero): Observable<any> {
+    return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
+      tap(_ => this.log(`updated hero id=${hero.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );
+  }
+
+  /** POST: add a new hero to the server */
+  addHero (hero: Hero): Observable<Hero> {
+    return this.http.post<Hero>(this.heroesUrl, hero, httpOptions).pipe(
+      tap((newhero: Hero) => this.log(`added hero with id=${newhero.id}`)),
+      catchError(this.handleError<Hero>('addHero'))
+    );
+  }
   /** Log a HeroService message with the Message Service */
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
