@@ -19,7 +19,7 @@ const httpOptions = {
 })
 export class HeroService {
 
-    private heroesUrl = 'api/heroes'; // Url to web API 
+    private heroesUrl = 'api/heroes'; // Url to web API
 
     getHeroes(): Observable<Hero[]> {
         // TODO: send message after getting heroes

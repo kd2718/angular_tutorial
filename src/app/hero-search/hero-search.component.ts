@@ -41,7 +41,7 @@ export class HeroSearchComponent implements OnInit {
 
             // switch to new search observalbe each time the term chagnes
             switchMap((term: string) => this.heroService.searchHeroes(term))
-        )
+        );
     }
 
 }
